@@ -1,4 +1,4 @@
-readme = """
+
 # TOPSIS for Text Classification Model Selection
 
 ## Overview
@@ -54,4 +54,4 @@ solution than using a single metric. TOPSIS helps in selecting a model that bala
 and computational efficiency.
 """
 
-print(readme)
+
