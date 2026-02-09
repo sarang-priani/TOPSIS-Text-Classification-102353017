@@ -1,72 +1,87 @@
-
-# TOPSIS-Based Model Selection for Text Classification
-Roll No: 102353017
+# TOPSIS-Based Pre-trained Model Selection for Text Classification  
+Roll Number: 102353017
 
 ## Overview
-This project focuses on selecting the best text classification model using the
-TOPSIS (Technique for Order Preference by Similarity to Ideal Solution) method.
-Instead of choosing a model based only on accuracy, multiple criteria are used
-to make a balanced decision.
+This project applies the TOPSIS (Technique for Order Preference by Similarity to Ideal Solution) method to select the best pre-trained model for a text classification task. Instead of relying on a single metric, multiple performance and efficiency criteria are considered to make a balanced decision.
 
-The models are first trained and evaluated, and then TOPSIS is applied on the
-obtained results.
+All datasets and models are taken from Hugging Face.
+
+---
 
 ## Dataset
-A subset of the 20 Newsgroups dataset is used for experimentation.
-The following two categories are selected:
-- rec.sport.hockey
-- sci.space
+The IMDB movie reviews dataset from Hugging Face is used.  
+To avoid class imbalance, a balanced subset is created consisting of:
+- 150 positive reviews  
+- 150 negative reviews  
 
-The dataset is divided into training and testing sets.
+This ensures fair comparison across models.
 
-## Models Trained
-The following text classification models are trained and evaluated:
-- Logistic Regression
-- Support Vector Machine (SVM)
-- Naive Bayes
-- Random Forest
+---
 
-TF-IDF is used for text feature extraction.
+## Models Used
+The following pre-trained transformer models from Hugging Face are evaluated:
+- BERT (bert-base-uncased)
+- DistilBERT (distilbert-base-uncased)
+- RoBERTa (roberta-base)
+- MobileBERT (google/mobilebert-uncased)
+
+The models are evaluated in a pre-trained (zero-shot) setting without task-specific fine-tuning.
+
+---
 
 ## Evaluation Criteria
-Each model is evaluated using the following criteria:
+Each model is evaluated using the following parameters:
 - Accuracy (benefit criterion)
-- F1-score (benefit criterion)
-- Inference Time (cost criterion)
-- Model Size (cost criterion)
+- Inference Time in milliseconds (cost criterion)
+- Model Size in MB (cost criterion)
 
-Accuracy and F1-score measure classification performance, while inference time
-and model size represent computational efficiency.
+F1-score is not used in TOPSIS since the models are not fine-tuned and F1 can be unstable in such settings.
+
+---
 
 ## Methodology
-The TOPSIS method is applied using these steps:
-1. Train models and calculate evaluation metrics
-2. Construct the decision matrix
-3. Normalize the decision matrix
-4. Apply weights to each criterion
-5. Identify ideal best and ideal worst solutions
-6. Compute distances from ideal solutions
-7. Calculate TOPSIS score and rank the models
+1. Load dataset and models from Hugging Face  
+2. Perform inference on the balanced dataset  
+3. Record accuracy, inference time, and model size  
+4. Construct the decision matrix  
+5. Normalize and weight the criteria  
+6. Apply the TOPSIS method  
+7. Rank the models based on TOPSIS score  
 
-The model with the highest TOPSIS score is selected as the best overall model.
+---
 
 ## Results
-Based on the TOPSIS score, the models are ranked according to their overall
-performance. Graphs are generated to compare accuracy, inference time, and
-final TOPSIS scores.
+The TOPSIS results show that **MobileBERT** achieves the highest overall score due to its good balance of accuracy, fast inference time, and small model size.
 
-## Tools Used
+Screenshots included in the repository:
+<img width="891" height="101" alt="image" src="https://github.com/user-attachments/assets/635c45fd-e48e-4e28-97c8-b8395f5fc7be" />
+
+<img width="557" height="471" alt="image" src="https://github.com/user-attachments/assets/98dca82a-e19e-47d0-8c3f-4b3385c50e23" />
+
+- `topsis_score_table.png`
+- `topsis_score_graph.png`
+
+---
+
+## Tools and Libraries
 - Python
 - Google Colab
+- Hugging Face (Transformers and Datasets)
 - Scikit-learn
 - Pandas
 - NumPy
 - Matplotlib
 
+---
+
 ## Conclusion
-This project shows that selecting a model using multiple criteria provides a
-more practical evaluation than relying on a single metric. TOPSIS helps in
-choosing a model that balances performance and computational efficiency.
+This project demonstrates that selecting models using multiple criteria provides a more practical evaluation than using accuracy alone. TOPSIS helps identify a model that balances performance and efficiency, making it suitable for real-world applications.
+
+---
+
+## Repository Structure
+- TOPSIS_Text_Classification_102353017.ipynb  
+- README.md  
 
 
 
